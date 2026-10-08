@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recorp · Formulario inicial</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0d0d0d;--muted:#8a8a8a;--line:#d9d9d9;--soft:#ededed}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;background:#fff;color:var(--ink);line-height:1.5}
+  .wrap{max-width:620px;margin:0 auto;padding:28px 20px 32px}
+  .sp{letter-spacing:.32em;text-transform:uppercase}
+  .top{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--ink)}
+  .brand{font-weight:800;font-size:20px;letter-spacing:.3em}
+  .tag{font-size:10px;color:var(--muted)}
+  .kick{font-size:10px;color:var(--muted);margin:32px 0 6px}
+  h1{font-size:34px;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0 0 10px}
+  .lead{color:#555;font-size:15px;margin:0 0 20px}
+  .bar{height:3px;background:var(--soft)} .bar div{height:3px;width:0;background:var(--ink);transition:width .3s}
+  .prog{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin:8px 0 24px}
+  .box{border:1px solid var(--line);padding:22px 20px;margin-bottom:16px}
+  .num{font-size:10px;color:var(--muted)}
+  h2{font-size:11px;font-weight:700;margin:6px 0 4px}
+  label{display:flex;align-items:flex-start;gap:10px;font-size:14px;margin:18px 0 8px}
+  label::before{content:"";width:8px;height:8px;background:var(--ink);margin-top:6px;flex:none}
+  .req{color:var(--muted);font-size:12px}
+  .opt{color:var(--muted)}
+  input,select,textarea{width:100%;padding:11px 12px;font:16px Inter,sans-serif;border:1px solid var(--line);border-radius:0;background:#fff;color:var(--ink);-webkit-appearance:none}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink)}
+  textarea{min-height:90px;resize:vertical}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font:13px Inter,sans-serif;padding:9px 14px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;border-radius:0}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  input[type=range]{padding:0;border:none;accent-color:var(--ink)}
+  .missing{border-color:#c0392b !important}
+  .dark{background:var(--ink);color:#fff;padding:26px 22px;margin:24px 0 8px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+  .dark h3{font-size:22px;font-weight:800;line-height:1.1;margin:0;padding-right:18px;border-right:1px solid #444}
+  .dark p{margin:0;font-size:14px;color:#cfcfcf}
+  .dark strong{color:#fff}
+  .send{width:100%;margin-top:16px;padding:16px;font:600 13px Inter,sans-serif;letter-spacing:.25em;text-transform:uppercase;background:var(--ink);color:#fff;border:none;border-radius:0;cursor:pointer}
+  .err{color:#c0392b;font-size:13px;margin:10px 0 0}
+  .ok{font-size:13px;margin:10px 0 0}
+  footer{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);border-top:1px solid var(--line);margin-top:28px;padding-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="brand">RECORP</span><span class="tag sp">Formulario inicial</span></div>
+
+  <p class="kick sp">Plan de alimentación</p>
+  <h1>Cuéntanos<br>de ti</h1>
+  <p class="lead">Con esta información diseñamos un plan hecho a tu medida. Mientras más detalle nos des, más preciso será.</p>
+  <div class="bar"><div id="bar"></div></div>
+  <div class="prog sp"><span>Progreso</span><span id="pct">0%</span></div>
+
+  <div class="box">
+    <div class="num sp">01</div><h2 class="sp">Tus datos</h2>
+    <label>Nombre completo <span class="req">*</span></label><input data-k="Nombre" data-r>
+    <div class="g2">
+      <div><label>Edad <span class="req">*</span></label><input type="number" data-k="Edad" data-r></div>
+      <div><label>Sexo <span class="req">*</span></label><div class="chips" data-k="Sexo" data-r data-o="Hombre|Mujer"></div></div>
+    </div>
+    <div class="g2">
+      <div><label>Peso (kg) <span class="req">*</span></label><input type="number" data-k="Peso (kg)" data-r></div>
+      <div><label>Estatura (cm) <span class="req">*</span></label><input type="number" data-k="Estatura (cm)" data-r></div>
+    </div>
+    <div class="g2">
+      <div><label><span><span class="opt">Opcional:</span> cintura (cm)</span></label><input type="number" data-k="Cintura (cm)"></div>
+      <div><label><span><span class="opt">Opcional:</span> % grasa</span></label><input type="number" data-k="% grasa"></div>
+    </div>
+    <label>¿Cómo te describes? <span class="req">*</span></label>
+    <select data-k="Composición corporal" data-r>
+      <option value="">Elige una opción</option>
+      <option>Muy delgado/a, poca masa muscular</option>
+      <option>Delgado/a con algo de grasa abdominal</option>
+      <option>Peso normal, grasa localizada</option>
+      <option>Sobrepeso moderado (5–10 kg)</option>
+      <option>Sobrepeso claro (10–20 kg)</option>
+      <option>Más de 20 kg sobre mi peso ideal</option>
+      <option>Musculoso/a, poca grasa</option>
+    </select>
+  </div>
+
+  <div class="box">
+    <div class="num sp">02</div><h2 class="sp">Tu objetivo</h2>
+    <label>Meta principal (hasta 2) <span class="req">*</span></label>
+    <div class="chips" data-k="Meta principal" data-r data-m="2" data-o="Perder grasa|Ganar músculo|Bajar de peso|Rendir más|Mantenerme|Comer más sano"></div>
+    <label><span><span class="opt">Opcional:</span> meta más específica</span></label><input data-k="Meta específica" placeholder="Bajar 6 kg antes de diciembre">
+    <label>¿En cuánto tiempo? <span class="req">*</span></label>
+    <div class="chips" data-k="Plazo" data-r data-o="4–6 semanas|2–3 meses|3–6 meses|Más de 6 meses"></div>
+  </div>
+
+  <div class="box">
+    <div class="num sp">03</div><h2 class="sp">Tu rutina</h2>
+    <label>Tipo de entrenamiento (hasta 2) <span class="req">*</span></label>
+    <div class="chips" data-k="Entrenamiento" data-r data-m="2" data-o="Pesas|Cardio|Calistenia|Funcional|Deporte|No entreno"></div>
+    <label>Días de entreno por semana <span class="req">*</span></label>
+    <div class="chips" data-k="Días/semana" data-r data-o="0|1|2|3|4|5|6|7"></div>
+    <label>Duración de cada sesión</label>
+    <div class="chips" data-k="Duración" data-o="-30 min|30–45|45–60|60–90|+90"></div>
+    <label>Hora en que entrenas</label><input type="time" data-k="Hora entreno">
+    <label>Actividad fuera del entreno <span class="req">*</span></label>
+    <select data-k="Actividad diaria" data-r>
+      <option value="">Elige una opción</option>
+      <option>Muy sedentario (escritorio)</option>
+      <option>Levemente activo</option>
+      <option>Moderado (8.000–12.000 pasos)</option>
+      <option>Muy activo (trabajo físico)</option>
+    </select>
+    <div class="g2">
+      <div><label>Me despierto <span class="req">*</span></label><input type="time" data-k="Despierta" data-r></div>
+      <div><label>Me duermo <span class="req">*</span></label><input type="time" data-k="Duerme" data-r></div>
+    </div>
+    <label>Nivel de estrés: <strong id="sv">5</strong>/10</label>
+    <input type="range" min="1" max="10" value="5" data-k="Estrés (1-10)" oninput="sv.textContent=this.value">
+  </div>
+
+  <div class="box">
+    <div class="num sp">04</div><h2 class="sp">Tu alimentación</h2>
+    <label>Tipo de alimentación <span class="req">*</span></label>
+    <div class="chips" data-k="Tipo de alimentación" data-r data-o="Flexible|Alta en proteína|Vegetariana|Vegana|Keto / low carb|Otra"></div>
+    <label>Comidas al día <span class="req">*</span></label>
+    <div class="chips" data-k="Comidas/día" data-r data-o="2|3|4|5|6+"></div>
+    <label>Describe un día normal de comida <span class="req">*</span></label>
+    <textarea data-k="Día típico" data-r placeholder="Desayuno: 2 huevos, arepa y café. Almuerzo: arroz, pollo y ensalada…"></textarea>
+    <label>Alimentos que te gustan <span class="req">*</span></label><textarea data-k="Le gusta" data-r></textarea>
+    <label>Alimentos que no comes <span class="req">*</span></label><textarea data-k="No come" data-r></textarea>
+    <label>Alergias o intolerancias <span class="req">*</span></label><input data-k="Alergias/intolerancias" data-r placeholder="Ninguna">
+    <label>¿Dónde comes? <span class="req">*</span></label>
+    <div class="chips" data-k="Dónde come" data-r data-o="En casa|Mixto|Fuera"></div>
+    <label>¿Quién cocina?</label>
+    <div class="chips" data-k="Quién cocina" data-o="Yo|Otra persona|Casi nadie"></div>
+    <label>Vasos de agua al día</label>
+    <div class="chips" data-k="Agua" data-o="1–3|4–6|7–9|10+"></div>
+    <label><span><span class="opt">Opcional:</span> suplementos (proteína, creatina…)</span></label><input data-k="Suplementos">
+  </div>
+
+  <div class="box">
+    <div class="num sp">05</div><h2 class="sp">Algo más</h2>
+    <label>¿Algo que debamos saber?</label><textarea data-k="Notas"></textarea>
+    <label>¿Cómo nos encontraste?</label>
+    <div class="chips" data-k="Origen" data-o="Instagram|WhatsApp|Recomendación|Otro"></div>
+  </div>
+
+  <div class="dark">
+    <h3>Último<br>paso</h3>
+    <p><strong>Toca el botón para copiar tus respuestas</strong> y pégalas en el chat de WhatsApp con Recorp.</p>
+  </div>
+  <button class="send" id="send">Copiar respuestas</button>
+  <p class="err" id="err"></p>
+  <p class="ok" id="ok"></p>
+
+  <footer class="sp"><span>Proceso de acompañamiento · Formulario inicial</span><span>01 / 01</span></footer>
+</div>
+
+<script>
+  document.querySelectorAll('.chips').forEach(c=>{
+    const max=+(c.dataset.m||1);
+    c.dataset.o.split('|').forEach(o=>{
+      const b=document.createElement('button');
+      b.type='button'; b.className='chip'; b.textContent=o;
+      b.onclick=()=>{
+        if(max===1){c.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');}
+        else if(b.classList.contains('on')) b.classList.remove('on');
+        else if(c.querySelectorAll('.on').length<max) b.classList.add('on');
+        c.classList.remove('missing'); update();
+      };
+      c.appendChild(b);
+    });
+  });
+
+  const fields=[...document.querySelectorAll('[data-k]')];
+  const val=f=>f.classList.contains('chips')
+    ? [...f.querySelectorAll('.on')].map(x=>x.textContent).join(', ')
+    : f.value.trim();
+
+  function update(){
+    const req=fields.filter(f=>'r' in f.dataset);
+    const p=Math.round(req.filter(f=>val(f)).length/req.length*100);
+    document.getElementById('bar').style.width=p+'%';
+    document.getElementById('pct').textContent=p+'%';
+    document.getElementById('err').textContent='';
+    document.getElementById('ok').textContent='';
+  }
+  fields.forEach(f=>['input','change'].forEach(e=>f.addEventListener(e,()=>{f.classList.remove('missing');update();})));
+
+  function copiar(txt){
+    if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(txt);
+    return new Promise((ok,fail)=>{
+      const t=document.createElement('textarea');
+      t.value=txt; t.style.position='absolute'; t.style.left='-9999px';
+      document.body.appendChild(t); t.select();
+      try{document.execCommand('copy')?ok():fail();}catch(e){fail();}
+      t.remove();
+    });
+  }
+
+  document.getElementById('send').onclick=()=>{
+    const miss=fields.filter(f=>'r' in f.dataset && !val(f));
+    if(miss.length){
+      miss.forEach(f=>f.classList.add('missing'));
+      miss[0].scrollIntoView({behavior:'smooth',block:'center'});
+      document.getElementById('err').textContent='Te faltan '+miss.length+' campos obligatorios (marcados en rojo).';
+      return;
+    }
+    const txt='*RECORP · FORMULARIO INICIAL*\n\n'+
+      fields.map(f=>{const v=val(f);return v?'■ *'+f.dataset.k+':* '+v:'';}).filter(Boolean).join('\n');
+    const btn=document.getElementById('send');
+    copiar(txt).then(()=>{
+      btn.textContent='Copiado ✓';
+      document.getElementById('ok').textContent='Listo. Ahora pega tus respuestas en el chat de WhatsApp con Recorp y envíalas.';
+      setTimeout(()=>btn.textContent='Copiar respuestas',3000);
+    }).catch(()=>{
+      document.getElementById('err').textContent='No se pudo copiar automáticamente. Intenta de nuevo.';
+    });
+  };
+</script>
+</body>
+</html>
